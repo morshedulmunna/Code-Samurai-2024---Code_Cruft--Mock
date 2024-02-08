@@ -1,20 +1,12 @@
-# Use an official Node.js runtime as a base image
-FROM node:14
+# syntax=docker/dockerfile:1
+FROM node:18.19.0-bookworm-slim
 
-# Set the working directory to /app
 WORKDIR /app
 
-# Copy package.json and package-lock.json to the working directory
-COPY package*.json ./
-
-# Install app dependencies
-RUN npm install
-
-# Bundle app source
 COPY . .
 
-# Expose port 5000
-EXPOSE 5000
+RUN bash -c "npm install"
 
-# Start the application
-CMD ["node", "app.js"]
+EXPOSE 3000
+
+CMD ["npm", "start"]
